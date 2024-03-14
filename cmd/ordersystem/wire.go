@@ -10,6 +10,7 @@ import (
 	"github.com/felipe-saboya/desafio-3-clean-architecture/internal/infra/database"
 	"github.com/felipe-saboya/desafio-3-clean-architecture/internal/infra/web"
 	"github.com/felipe-saboya/desafio-3-clean-architecture/internal/usecase"
+	"github.com/felipe-saboya/desafio-3-clean-architecture/pkg/events"
 
 	"github.com/google/wire"
 )
@@ -38,6 +39,14 @@ func NewCreateOrderUseCase(db *sql.DB, eventDispatcher events.EventDispatcherInt
 		usecase.NewCreateOrderUseCase,
 	)
 	return &usecase.CreateOrderUseCase{}
+}
+
+func NewListOrdersUseCase(db *sql.DB) *usecase.ListOrdersUseCase {
+	wire.Build(
+		setOrderRepositoryDependency,
+		usecase.NewListOrdersUseCase,
+	)
+	return &usecase.ListOrdersUseCase{}
 }
 
 func NewWebOrderHandler(db *sql.DB, eventDispatcher events.EventDispatcherInterface) *web.WebOrderHandler {
