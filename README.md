@@ -8,12 +8,11 @@
 docker-compose up -d
 ```
 
-### 2 MySQL
+### 2 MySQL - Makefile
 
 ```
-docker-compose exec mysql bash
-mysql -uroot -p orders
-CREATE TABLE orders (id varchar(255) NOT NULL, price float NOT NULL, tax float NOT NULL, final_price float NOT NULL, PRIMARY KEY (id));
+make migrate-up
+make migrate-down
 ```
 
 ### 3 Start
